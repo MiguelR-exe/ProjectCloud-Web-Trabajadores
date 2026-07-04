@@ -1,0 +1,65 @@
+.site-header {
+  background: linear-gradient(135deg, var(--rojo-osc), var(--rojo));
+  border-bottom: 4px solid var(--dorado);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.site-header-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.brand {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  line-height: 1.1;
+}
+.brand-eyebrow {
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  color: var(--dorado-claro);
+}
+.brand-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--crema);
+  letter-spacing: 0.02em;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.header-link {
+  color: var(--crema);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.header-link:hover { color: var(--dorado-claro); }
+.as-button { font-family: inherit; }
+.header-user {
+  color: var(--dorado-claro);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.header-role {
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 4px;
+}

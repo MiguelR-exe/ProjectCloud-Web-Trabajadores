@@ -1,0 +1,29 @@
+.app { min-height: 100vh; display: flex; flex-direction: column; }
+.app-main { flex: 1; }
+.session-banner {
+  background: var(--dorado);
+  color: var(--negro);
+  text-align: center;
+  padding: 10px 24px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.session-banner button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--negro);
+  font-weight: 800;
+}
+.pie {
+  background: var(--negro);
+  color: var(--dorado-claro);
+  text-align: center;
+  padding: 24px;
+  font-size: 0.85rem;
+}
