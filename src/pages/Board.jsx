@@ -16,11 +16,13 @@ export default function Board() {
   const [completing, setCompleting] = useState(null);
 
   const columns = columnsForRole(user.role);
-  const canComplete = canCompleteStage(user.role);
-
   const loadOrders = async () => {
     const data = await listOrders();
-    setOrders(data);
+    setOrders(
+      [...data].sort((a, b) =>
+        (a.created_at || "").localeCompare(b.created_at || "")
+      )
+    );
   };
 
   useEffect(() => {
@@ -71,6 +73,7 @@ export default function Board() {
         <div className="board-columns">
           {columns.map((col) => {
             const colOrders = orders.filter((o) => matchesStage(o, col.stage));
+            const canComplete = canCompleteStage(user.role, col.stage);
             return (
               <div key={col.stage} className="board-column">
                 <div className="board-column-header">

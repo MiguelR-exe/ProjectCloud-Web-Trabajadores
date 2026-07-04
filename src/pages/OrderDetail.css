@@ -89,7 +89,7 @@
 }
 .history-row {
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto auto auto;
   gap: 12px;
   font-size: 0.82rem;
   color: #6b5d52;
@@ -100,6 +100,11 @@
 .history-step {
   font-weight: 700;
   color: var(--negro);
+}
+.history-duration {
+  font-weight: 700;
+  color: var(--rojo);
+  white-space: nowrap;
 }
 .order-detail-actions {
   display: flex;

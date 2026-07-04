@@ -3,7 +3,17 @@ import { listOrders } from "../api/orders";
 import { bucketForStatus, DASHBOARD_LABELS } from "../utils/workflow";
 import "./Dashboard.css";
 
-const BUCKET_ORDER = ["RECEIVED", "COOK", "PACK", "DELIVER", "COMPLETED"];
+const BUCKET_ORDER = [
+  "RECEIVED",
+  "COOK",
+  "PACK",
+  "DELIVER",
+  "RECEIVE",
+  "COMPLETED",
+  "FAILED",
+  "EXPIRED",
+];
+const TIMED_STAGES = ["COOK", "PACK", "DELIVER", "RECEIVE"];
 
 export default function Dashboard() {
   const [orders, setOrders] = useState([]);
@@ -31,6 +41,30 @@ export default function Dashboard() {
     return c;
   }, [orders]);
 
+  const averageDurations = useMemo(() => {
+    const values = Object.fromEntries(TIMED_STAGES.map((stage) => [stage, []]));
+    orders.forEach((order) => {
+      (order.history || []).forEach((event) => {
+        if (
+          event.event === "COMPLETED" &&
+          values[event.step] &&
+          event.duration_seconds != null
+        ) {
+          values[event.step].push(Number(event.duration_seconds));
+        }
+      });
+    });
+    return Object.fromEntries(
+      TIMED_STAGES.map((stage) => {
+        const durations = values[stage];
+        const average = durations.length
+          ? Math.round(durations.reduce((sum, value) => sum + value, 0) / durations.length)
+          : 0;
+        return [stage, average];
+      })
+    );
+  }, [orders]);
+
   return (
     <div className="dashboard-page">
       <h1 className="seccion-titulo">Dashboard</h1>
@@ -50,6 +84,14 @@ export default function Dashboard() {
             <span className="stat-value">{orders.length}</span>
             <span className="stat-label">Total de pedidos</span>
           </div>
+          {TIMED_STAGES.map((stage) => (
+            <div key={`duration-${stage}`} className="stat-card">
+              <span className="stat-value">{averageDurations[stage]}s</span>
+              <span className="stat-label">
+                Tiempo promedio: {DASHBOARD_LABELS[stage]}
+              </span>
+            </div>
+          ))}
         </div>
       )}
     </div>

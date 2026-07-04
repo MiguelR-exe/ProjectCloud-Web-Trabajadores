@@ -118,6 +118,9 @@ export default function OrderDetail() {
                 <span className="history-time">
                   {h.timestamp ? new Date(h.timestamp).toLocaleString("es-PE") : (h.at || "—")}
                 </span>
+                {h.duration_seconds != null && (
+                  <span className="history-duration">{h.duration_seconds}s</span>
+                )}
               </div>
             ))}
           </div>
@@ -126,12 +129,12 @@ export default function OrderDetail() {
         {error && <p className="estado-msg error">{error}</p>}
 
         <div className="order-detail-actions">
-          {currentColumn && canCompleteStage(user.role) && order.task_token && (
+          {currentColumn && canCompleteStage(user.role, currentColumn.stage) && order.task_token && (
             <button className="btn-primario" onClick={handleComplete} disabled={busy}>
               {busy ? "Procesando..." : `Completar ${currentColumn.label.toLowerCase()}`}
             </button>
           )}
-          {currentColumn && canCompleteStage(user.role) && !order.task_token && (
+          {currentColumn && canCompleteStage(user.role, currentColumn.stage) && !order.task_token && (
             <p className="estado-msg">
               Este pedido aún no tiene una tarea asignada para esta etapa; no se puede completar todavía.
             </p>

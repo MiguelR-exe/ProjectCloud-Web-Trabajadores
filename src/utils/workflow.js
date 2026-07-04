@@ -42,11 +42,21 @@ export function matchesStage(order, stage) {
   return currentStage(order) === stage;
 }
 
-export function canCompleteStage(role) {
-  return role === "worker" || role === "admin" || !!STAGE_BY_ROLE[role];
+export function canCompleteStage(role, stage) {
+  if (role === "worker" || role === "admin") return true;
+  return STAGE_BY_ROLE[role] === stage;
 }
 
-const DASHBOARD_BUCKETS = ["RECEIVED", "COOK", "PACK", "DELIVER", "COMPLETED"];
+const DASHBOARD_BUCKETS = [
+  "RECEIVED",
+  "COOK",
+  "PACK",
+  "DELIVER",
+  "RECEIVE",
+  "COMPLETED",
+  "FAILED",
+  "EXPIRED",
+];
 
 export function bucketForStatus(status) {
   const s = (status || "").toUpperCase();
@@ -59,6 +69,9 @@ export const DASHBOARD_LABELS = {
   COOK: "En cocina",
   PACK: "Empacando",
   DELIVER: "En reparto",
+  RECEIVE: "Esperando al cliente",
   COMPLETED: "Completados",
+  FAILED: "Fallidos",
+  EXPIRED: "Vencidos",
   OTRO: "Otros",
 };

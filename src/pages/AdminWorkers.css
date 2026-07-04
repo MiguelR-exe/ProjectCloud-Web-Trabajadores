@@ -68,3 +68,20 @@
 }
 .btn-peligro:hover:not(:disabled) { background: var(--rojo); color: #fff; }
 .btn-primario:disabled, .btn-peligro:disabled { opacity: 0.6; cursor: not-allowed; }
+.workers-list {
+  margin-top: 20px;
+}
+.worker-row {
+  display: grid;
+  grid-template-columns: 1fr 120px 1.5fr;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ecddc4;
+  font-size: 0.9rem;
+}
+@media (max-width: 600px) {
+  .worker-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
