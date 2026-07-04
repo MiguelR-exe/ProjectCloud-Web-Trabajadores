@@ -21,7 +21,7 @@ export default function Header() {
         </Link>
 
         <nav className="header-actions">
-          <Link to="/" className="header-link">Dashboard</Link>
+          <Link to="/" className="header-link">Inicio</Link>
           <Link to="/pedidos" className="header-link">Pedidos</Link>
           {user?.role === "admin" && (
             <Link to="/admin/trabajadores" className="header-link">Trabajadores</Link>
